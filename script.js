@@ -320,6 +320,39 @@ if (uploadError) {
 if (updateError) {
     throw updateError;
 }
+            const message =
+`🔔 New Bhajana Programme Request
+
+📄 ARN : ${arn}
+
+👤 Applicant : ${fullName.value}
+
+🎉 Occasion : ${getOccasion()}
+
+📅 Date : ${eventDate.value}
+
+🕒 Time : ${eventTime.value}
+
+📍 Venue : ${venue.value}
+
+📞 Mobile : ${mobile.value}
+
+👥 Expected Devotees : ${devotees.value}
+
+🙏 Jai Sri Ram`;
+
+const { error: telegramError } = await supabaseClient.functions.invoke(
+    "send-email",
+    {
+        body: {
+            message: message
+        }
+    }
+);
+
+if (telegramError) {
+    console.error("Telegram Error:", telegramError);
+}
             alert(
 `🎉 Request Submitted Successfully!
 

@@ -384,45 +384,189 @@ async function generatePDF(arn) {
     const { jsPDF } = window.jspdf;
 
     const doc = new jsPDF({
+        orientation: "portrait",
         unit: "mm",
         format: "a4"
     });
 
-    const pageWidth = 210;
     const margin = 20;
-    const lineHeight = 7;
+    const pageWidth = 210;
+    const usableWidth = 170;
+
     let y = 20;
 
-    const letter = document.getElementById("generatedLetter").innerText;
+    const lineGap = 7;
 
+    // ---------- Read Form Values ----------
+    const fullName = document.getElementById("fullName").value.trim();
+    const occasion = document.getElementById("occasion").value;
+    const otherOccasion = document.getElementById("otherOccasion").value.trim();
+    const finalOccasion = occasion === "Other" ? otherOccasion : occasion;
+
+    const eventDate = document.getElementById("eventDate").value;
+    const eventTime = document.getElementById("eventTime").value;
+
+    const venue = document.getElementById("venue").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const devotees = document.getElementById("devotees").value.trim();
+    const contactPerson = document.getElementById("contactPerson").value.trim();
+    const mobile = document.getElementById("mobile").value.trim();
+    const alternateMobile = document.getElementById("alternateMobile").value.trim();
+    const landmark = document.getElementById("landmark").value.trim();
+    const maps = document.getElementById("maps").value.trim();
+    const remarks = document.getElementById("remarks").value.trim();
+
+    const submittedOn = new Date().toLocaleString("en-IN");
+
+    // ---------- Heading ----------
     doc.setFont("times", "bold");
     doc.setFontSize(16);
+
     doc.text("Bhajana Programme Request", pageWidth / 2, y, {
         align: "center"
     });
 
     y += 12;
 
-    doc.setFont("times", "normal");
     doc.setFontSize(11);
+    doc.setFont("times", "normal");
 
     doc.text(`Application Reference No : ${arn}`, margin, y);
-    y += 7;
+    y += lineGap;
 
-    doc.text(`Submitted On : ${new Date().toLocaleString()}`, margin, y);
+    doc.text(`Submitted On : ${submittedOn}`, margin, y);
+
     y += 12;
 
-    const lines = doc.splitTextToSize(letter, 170);
+    // ---------- Address ----------
+    doc.text("To", margin, y);
+    y += lineGap;
 
-    lines.forEach(line => {
-        if (y > 280) {
+    doc.setFont("times", "bold");
+    doc.text("The President", margin, y);
+    y += 6;
+
+    doc.text("Maha Manthra Bhajana Mandali", margin, y);
+    y += 6;
+
+    doc.text("Chennai", margin, y);
+
+    y += 12;
+
+    doc.setFont("times", "bold");
+    doc.text("Subject: Request for Bhajana & Nama Sankeerthanam Programme", margin, y);
+
+    y += 10;
+
+    doc.setFont("times", "normal");
+
+    doc.text("Respected Sir,", margin, y);
+
+    y += 8;
+
+    doc.text("Jai Sri Ram.", margin, y);
+
+    y += 10;
+
+    const intro =
+        `I, ${fullName}, respectfully request Maha Manthra Bhajana Mandali to conduct Bhajana & Nama Sankeerthanam on the occasion of ${finalOccasion}.`;
+
+    const introLines = doc.splitTextToSize(intro, usableWidth);
+
+    doc.text(introLines, margin, y);
+
+    y += introLines.length * 6 + 8;
+
+    // ---------- Programme Details ----------
+    doc.setFont("times", "bold");
+    doc.text("Programme Details", margin, y);
+
+    y += 6;
+
+    doc.line(margin, y, 190, y);
+
+    y += 8;
+
+    doc.setFont("times", "normal");
+
+    const details = [
+        ["Occasion", finalOccasion],
+        ["Date", eventDate],
+        ["Time", eventTime],
+        ["Venue", venue],
+        ["Address", address],
+        ["Expected Devotees", devotees],
+        ["Contact Person", contactPerson],
+        ["Mobile Number", mobile],
+        ["Alternate Mobile", alternateMobile || "-"],
+        ["Landmark", landmark || "-"],
+        ["Google Maps", maps || "-"]
+    ];
+
+    details.forEach(item => {
+
+        if (y > 270) {
             doc.addPage();
             y = 20;
         }
 
-        doc.text(line, margin, y);
-        y += lineHeight;
+        doc.setFont("times", "bold");
+        doc.text(item[0], margin, y);
+
+        doc.setFont("times", "normal");
+
+        const valueLines = doc.splitTextToSize(item[1], 105);
+
+        doc.text(":", 72, y);
+        doc.text(valueLines, 76, y);
+
+        y += valueLines.length * 6 + 2;
+
     });
+
+    y += 6;
+
+    // ---------- Special Instructions ----------
+    doc.setFont("times", "bold");
+    doc.text("Special Instructions", margin, y);
+
+    y += 6;
+
+    doc.line(margin, y, 190, y);
+
+    y += 8;
+
+    doc.setFont("times", "normal");
+
+    const special =
+        remarks === "" ? "Nil" : remarks;
+
+    const specialLines =
+        doc.splitTextToSize(special, usableWidth);
+
+    doc.text(specialLines, margin, y);
+
+    y += specialLines.length * 6 + 10;
+
+    const closing =
+        "I humbly request the Mandali to kindly accept this invitation and bless the occasion with Divine Nama Sankeerthanam.";
+
+    const closingLines =
+        doc.splitTextToSize(closing, usableWidth);
+
+    doc.text(closingLines, margin, y);
+
+    y += closingLines.length * 6 + 10;
+
+    doc.text("Thanking You.", margin, y);
+
+    y += 10;
+
+    doc.text("Yours Faithfully,", margin, y);
+
+    y += 18;
+
+    doc.text(fullName, margin, y);
 
     return doc.output("blob");
 }

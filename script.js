@@ -248,18 +248,14 @@ submitButton.addEventListener("click", async function () {
 
 Your Bhajana Invitation Request has been submitted successfully.
 
-Application Reference Number (ARN)
-
-${arn}
+Application Reference Number (ARN):
+${data[0].request_no}
 
 Please save this ARN for future communication and status tracking.
 
-Thank you for choosing
-Maha Manthra Bhajana Mandali.
-
 Jai Sri Ram 🙏`
-        );
-
+);
+        
         form.reset();
 
         generatedLetter.textContent = "";

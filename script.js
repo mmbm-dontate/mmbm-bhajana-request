@@ -149,7 +149,7 @@ generateLetterButton.addEventListener(
 
         const letter = `To
 
-The Secretary
+The President
 Maha Manthra Bhajana Mandali
 Chennai
 

@@ -88,3 +88,12 @@ body{
 }
 
 }
+
+#generatedLetter{
+    margin-top:15px;
+    border:1px solid #dcdcdc;
+    background:#fafafa;
+    padding:25px;
+    line-height:1.8;
+    border-radius:6px;
+}

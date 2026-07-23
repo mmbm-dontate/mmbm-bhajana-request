@@ -351,7 +351,12 @@ const { error: telegramError } = await supabaseClient.functions.invoke(
 );
 
 if (telegramError) {
-    console.error("Telegram Error:", telegramError);
+    alert(
+        "Telegram Error:\n\n" +
+        JSON.stringify(telegramError, null, 2)
+    );
+
+    console.error(telegramError);
 }
             alert(
 `🎉 Request Submitted Successfully!

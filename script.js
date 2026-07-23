@@ -341,7 +341,10 @@ if (updateError) {
 
 🙏 Jai Sri Ram`;
 
-const { error: telegramError } = await supabaseClient.functions.invoke(
+console.log("Calling Telegram function...");
+
+const { data, error: telegramError } =
+await supabaseClient.functions.invoke(
     "send-email",
     {
         body: {
@@ -349,6 +352,8 @@ const { error: telegramError } = await supabaseClient.functions.invoke(
         }
     }
 );
+
+console.log("Function returned", data, telegramError);
 
 if (telegramError) {
     alert(

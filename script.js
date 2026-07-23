@@ -354,3 +354,50 @@ Jai Sri Ram 🙏`
     }
 
 );
+
+async function generatePDF(arn) {
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF({
+        unit: "mm",
+        format: "a4"
+    });
+
+    const pageWidth = 210;
+    const margin = 20;
+    const lineHeight = 7;
+    let y = 20;
+
+    const letter = document.getElementById("generatedLetter").innerText;
+
+    doc.setFont("times", "bold");
+    doc.setFontSize(16);
+    doc.text("Bhajana Programme Request", pageWidth / 2, y, {
+        align: "center"
+    });
+
+    y += 12;
+
+    doc.setFont("times", "normal");
+    doc.setFontSize(11);
+
+    doc.text(`Application Reference No : ${arn}`, margin, y);
+    y += 7;
+
+    doc.text(`Submitted On : ${new Date().toLocaleString()}`, margin, y);
+    y += 12;
+
+    const lines = doc.splitTextToSize(letter, 170);
+
+    lines.forEach(line => {
+        if (y > 280) {
+            doc.addPage();
+            y = 20;
+        }
+
+        doc.text(line, margin, y);
+        y += lineHeight;
+    });
+
+    return doc.output("blob");
+}

@@ -294,6 +294,9 @@ submitButton.addEventListener(
             }
 
             const arn = data[0].request_no;
+            
+// Generate PDF
+const pdfBlob = await generatePDF(arn);
 
             alert(
 `🎉 Request Submitted Successfully!

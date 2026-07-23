@@ -80,17 +80,11 @@
         <select id="occasion">
 
             <option value="">Select Occasion</option>
-
             <option>Gruhapravesam</option>
-
             <option>Birthday</option>
-
             <option>Wedding</option>
-
             <option>Temple Festival</option>
-
             <option>Nama Sankeerthanam</option>
-
             <option>Other</option>
 
         </select>
@@ -139,21 +133,41 @@
             <span class="required">*</span>
         </label>
 
-        <label for="devotees">
-        Expected Number of Devotees
-        <span class="required">*</span>
-        </label>
-
-<input
-    type="number"
-    id="devotees"
-    min="1"
-    placeholder="Example: 150">
-
         <textarea
             id="address"
             rows="5"
             placeholder="Enter Complete Address"></textarea>
+
+        <label for="devotees">
+            Expected Number of Devotees
+            <span class="required">*</span>
+        </label>
+
+        <input
+            type="number"
+            id="devotees"
+            min="1"
+            placeholder="Example: 150">
+
+        <label for="contactPerson">
+            Contact Person at Venue
+            <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="contactPerson"
+            placeholder="Enter Contact Person Name">
+
+        <label for="alternateMobile">
+            Alternate Mobile Number (Optional)
+        </label>
+
+        <input
+            type="text"
+            id="alternateMobile"
+            maxlength="10"
+            placeholder="Enter Alternate Mobile Number">
 
         <label for="landmark">
             Landmark (Optional)
@@ -172,6 +186,15 @@
             type="url"
             id="maps"
             placeholder="Paste Google Maps Link">
+
+        <label for="remarks">
+            Special Instructions / Remarks (Optional)
+        </label>
+
+        <textarea
+            id="remarks"
+            rows="4"
+            placeholder="Any special instructions for the Mandali"></textarea>
 
         <button
             type="button"

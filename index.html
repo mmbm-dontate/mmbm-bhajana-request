@@ -1,81 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bhajana Programme Invitation</title>
+<form id="invitationForm">
 
-    <link rel="stylesheet" href="style.css">
-</head>
+    <h2>Applicant Details</h2>
 
-<body>
+    <label>Full Name <span style="color:red">*</span></label>
+    <input type="text" id="fullName" required>
 
-<div class="container">
+    <label>Mobile Number <span style="color:red">*</span></label>
+    <input type="text" id="mobile" required>
 
-    <h1>Bhajana Programme Invitation</h1>
+    <label>Email Address</label>
+    <input type="email" id="email">
 
-    <p class="subtitle">
-        Request Maha Manthra Bhajana Mandali to conduct Bhajana &
-        Nama Sankeerthanam at your place.
-    </p>
+    <label>City / State</label>
+    <input type="text" id="city">
 
-    <form>
+    <h2>Programme Details</h2>
 
-        <h2>Applicant Details</h2>
+    <label>Occasion <span style="color:red">*</span></label>
 
-        <label>Full Name</label>
-        <input type="text">
+    <select id="occasion">
+        <option value="">Select</option>
+        <option>Gruhapravesam</option>
+        <option>Birthday</option>
+        <option>Wedding</option>
+        <option>Temple Festival</option>
+        <option>Nama Sankeerthanam</option>
+        <option>Other</option>
+    </select>
 
-        <label>Mobile Number</label>
-        <input type="text">
+    <div id="otherOccasionDiv" style="display:none;">
+        <label>Please Specify Occasion</label>
+        <input type="text" id="otherOccasion">
+    </div>
 
-        <label>Email Address</label>
-        <input type="email">
+    <label>Date <span style="color:red">*</span></label>
+    <input type="date" id="eventDate">
 
-        <label>City / State</label>
-        <input type="text">
+    <label>Time <span style="color:red">*</span></label>
+    <input type="time" id="eventTime">
 
-        <h2>Programme Details</h2>
+    <label>Venue Name <span style="color:red">*</span></label>
+    <input type="text" id="venue">
 
-        <label>Occasion</label>
+    <label>Full Address <span style="color:red">*</span></label>
+    <textarea rows="4" id="address"></textarea>
 
-        <select>
-            <option>Select</option>
-            <option>Gruhapravesam</option>
-            <option>Birthday</option>
-            <option>Wedding</option>
-            <option>Temple Festival</option>
-            <option>Nama Sankeerthanam</option>
-            <option>Other</option>
-        </select>
+    <label>Landmark (Optional)</label>
+    <input type="text" id="landmark">
 
-        <label>Date</label>
-        <input type="date">
+    <label>Google Maps Link (Optional)</label>
+    <input type="text" id="maps">
 
-        <label>Time</label>
-        <input type="time">
+    <button type="button" id="generateLetter">
+        Generate Request Letter
+    </button>
 
-        <label>Venue Name</label>
-        <input type="text">
+</form>
 
-        <label>Full Address</label>
-        <textarea rows="4"></textarea>
+<div id="letterPreview" style="display:none; margin-top:40px;">
 
-        <label>Landmark (Optional)</label>
-        <input type="text">
+    <h2>Request Letter Preview</h2>
 
-        <label>Google Maps Link (Optional)</label>
-        <input type="text">
-
-        <button type="button">
-            Generate Request Letter
-        </button>
-
-    </form>
+    <div id="generatedLetter"></div>
 
 </div>
-
-<script src="script.js"></script>
-
-</body>
-</html>

@@ -1,70 +1,198 @@
-<form id="invitationForm">
+<!DOCTYPE html>
+<html lang="en">
 
-    <h2>Applicant Details</h2>
+<head>
 
-    <label>Full Name <span style="color:red">*</span></label>
-    <input type="text" id="fullName" required>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <label>Mobile Number <span style="color:red">*</span></label>
-    <input type="text" id="mobile" required>
+    <title>Bhajana Programme Invitation Request</title>
 
-    <label>Email Address</label>
-    <input type="email" id="email">
+    <link rel="stylesheet" href="style.css">
 
-    <label>City / State</label>
-    <input type="text" id="city">
+</head>
 
-    <h2>Programme Details</h2>
+<body>
 
-    <label>Occasion <span style="color:red">*</span></label>
+<div class="container">
 
-    <select id="occasion">
-        <option value="">Select</option>
-        <option>Gruhapravesam</option>
-        <option>Birthday</option>
-        <option>Wedding</option>
-        <option>Temple Festival</option>
-        <option>Nama Sankeerthanam</option>
-        <option>Other</option>
-    </select>
+    <h1>Bhajana Programme Invitation Request</h1>
 
-    <div id="otherOccasionDiv" style="display:none;">
-        <label>Please Specify Occasion</label>
-        <input type="text" id="otherOccasion">
+    <p class="subtitle">
+        If you wish to invite <strong>Maha Manthra Bhajana Mandali</strong> to conduct
+        Bhajana & Nama Sankeerthanam at your residence, temple or any other venue,
+        kindly complete the request form below.
+    </p>
+
+    <p class="mandatory">
+        Fields marked with <span>*</span> are mandatory.
+    </p>
+
+    <form id="invitationForm">
+
+        <h2>Applicant Details</h2>
+
+        <label for="fullName">
+            Full Name <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="fullName"
+            placeholder="Enter Full Name"
+            required>
+
+        <label for="mobile">
+            Mobile Number <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="mobile"
+            placeholder="Enter Mobile Number"
+            maxlength="10"
+            required>
+
+        <label for="email">
+            Email Address
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter Email Address">
+
+        <label for="city">
+            City / State
+        </label>
+
+        <input
+            type="text"
+            id="city"
+            placeholder="Enter City / State">
+
+        <h2>Programme Details</h2>
+
+        <label for="occasion">
+            Occasion <span class="required">*</span>
+        </label>
+
+        <select id="occasion">
+
+            <option value="">Select Occasion</option>
+
+            <option>Gruhapravesam</option>
+
+            <option>Birthday</option>
+
+            <option>Wedding</option>
+
+            <option>Temple Festival</option>
+
+            <option>Nama Sankeerthanam</option>
+
+            <option>Other</option>
+
+        </select>
+
+        <div id="otherOccasionDiv" style="display:none;">
+
+            <label for="otherOccasion">
+                Please Specify Occasion
+            </label>
+
+            <input
+                type="text"
+                id="otherOccasion"
+                placeholder="Specify Occasion">
+
+        </div>
+
+        <label for="eventDate">
+            Programme Date <span class="required">*</span>
+        </label>
+
+        <input
+            type="date"
+            id="eventDate">
+
+        <label for="eventTime">
+            Programme Time <span class="required">*</span>
+        </label>
+
+        <input
+            type="time"
+            id="eventTime">
+
+        <label for="venue">
+            Name of the Place / Temple / Residence
+            <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="venue"
+            placeholder="Enter Venue Name">
+
+        <label for="address">
+            Programme Venue Address
+            <span class="required">*</span>
+        </label>
+
+        <textarea
+            id="address"
+            rows="5"
+            placeholder="Enter Complete Address"></textarea>
+
+        <label for="landmark">
+            Landmark (Optional)
+        </label>
+
+        <input
+            type="text"
+            id="landmark"
+            placeholder="Nearest Landmark">
+
+        <label for="maps">
+            Google Maps Link (Optional)
+        </label>
+
+        <input
+            type="url"
+            id="maps"
+            placeholder="Paste Google Maps Link">
+
+        <button
+            type="button"
+            id="generateLetter">
+
+            Generate Request Letter
+
+        </button>
+
+    </form>
+
+    <div id="letterPreview" style="display:none;">
+
+        <h2>Request Letter Preview</h2>
+
+        <div id="generatedLetter"></div>
+
+        <button
+            type="button"
+            id="submitRequest"
+            style="display:none;">
+
+            Submit Request
+
+        </button>
+
     </div>
 
-    <label>Date <span style="color:red">*</span></label>
-    <input type="date" id="eventDate">
-
-    <label>Time <span style="color:red">*</span></label>
-    <input type="time" id="eventTime">
-
-    <label>Name of the Place / Temple / Residence <span style="color:red">*</span></label>
-    <input type="text" id="venue">
-
-    <label>Programme Venue Address <span style="color:red">*</span></label>
-    <textarea rows="4" id="address"></textarea>
-    
-    <label>Landmark (Optional)</label>
-    <input type="text" id="landmark">
-
-    <label>Google Maps Link (Optional)</label>
-    <input type="text" id="maps">
-
-    <button type="button" id="generateLetter">
-        Generate Request Letter
-    </button>
-
-</form>
-
-<div id="letterPreview" style="display:none; margin-top:40px;">
-
-    <h2>Request Letter Preview</h2>
-
-    <div id="generatedLetter"></div>
-
-    <button type="button" id="submitRequest" style="display:none;">
-        Submit Request
-    </button>
-
 </div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

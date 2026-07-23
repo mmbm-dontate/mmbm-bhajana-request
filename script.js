@@ -557,12 +557,17 @@ submitButton.addEventListener("click", async function () {
         console.table(data);
 
         alert(
-            "Your Bhajana Invitation Request has been submitted successfully."
-        );
+            🎉 Request Submitted Successfully!
 
-        /******************************
-         * RESET FORM
-         ******************************/
+        Your Bhajana Invitation Request has been submitted successfully.
+
+        Application Reference Number (ARN):
+        ${data[0].request_no}
+
+        Please save this ARN for future communication and status tracking.
+
+        Jai Sri Ram 🙏`
+    );
 
         form.reset();
 

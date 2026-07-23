@@ -297,7 +297,29 @@ submitButton.addEventListener(
             
 // Generate PDF
 const pdfBlob = await generatePDF(arn);
+            const fileName = `${arn}.pdf`;
 
+const { error: uploadError } = await supabaseClient.storage
+    .from("bhajana-request-pdfs")
+    .upload(fileName, pdfBlob, {
+        contentType: "application/pdf",
+        upsert: true
+    });
+
+if (uploadError) {
+    throw uploadError;
+}
+            const { error: updateError } = await supabaseClient
+    .from("bhajana_requests")
+    .update({
+        pdf_url: fileName,
+        pdf_generated: true
+    })
+    .eq("request_no", arn);
+
+if (updateError) {
+    throw updateError;
+}
             alert(
 `🎉 Request Submitted Successfully!
 

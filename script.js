@@ -343,8 +343,10 @@ if (updateError) {
 
 console.log("Calling Telegram function...");
 
-const { data, error: telegramError } =
-await supabaseClient.functions.invoke(
+const {
+    data: telegramData,
+    error: telegramError
+} = await supabaseClient.functions.invoke(
     "send-email",
     {
         body: {
@@ -353,8 +355,7 @@ await supabaseClient.functions.invoke(
     }
 );
 
-console.log("Function returned", data, telegramError);
-
+console.log("Function returned", telegramData, telegramError);
 if (telegramError) {
     alert(
         "Telegram Error:\n\n" +
